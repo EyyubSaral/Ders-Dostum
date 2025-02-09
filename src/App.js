@@ -1,13 +1,13 @@
-import './styles.css'
-import { useState } from 'react'
+import "./styles.css";
+import { useState } from "react";
 
 export default function app() {
   const [flashCard, setFlashCard] = useState({
-    question: 'React nedir?',
-    choices: ["JavaScript framework'ü", 'JavaScript kütüphanesi'],
-    answer: 'JavaScript kütüphanesi.',
+    question: "React nedir?",
+    choices: ["JavaScript framework'ü", "JavaScript kütüphanesi"],
+    answer: "JavaScript kütüphanesi.",
     explanation: `Birinin framework diyebilme cüretini gösterdiğini duyarsanız, onu mümkün olduğunca bilgili bir şekilde düzeltmeniz, tercihen yanıtınıza " aslında..." diye başlamanız önemlidir.`,
-  })
+  });
 
   /* Challenge: 
 
@@ -19,34 +19,37 @@ export default function app() {
            
         3. Aynı kalıp sonraki tıklamalar için de tekrarlanmalıdır, böylece kullanıcı kartı istediği kadar ileri geri çevirmeye devam edebilir. 
 */
-
+  const [flipped, setFlipped] = useState(false);
   return (
     <div>
       <header>
-        <img src='./images/react.svg' />
+        <img src="./images/react.svg" />
         <h1> React Çalışma Arkadaşı </h1>
       </header>
 
       {/*-------Aşağıdaki div'i düzenleyin------------*/}
 
-      <div className='flash-card'>
+      <div
+        className={`flash-card ${flipped ? "flipped" : ""}`}
+        onClick={() => setFlipped((prev) => !prev)}
+      >
         {/*-------Yukarıdaki div'i düzenleyin------------*/}
 
-        <div className='flash-card-inner'>
-          <div className='flash-card-front'>
-            <p className='question'>{flashCard.question}</p>
-            <ol type='a'>
+        <div className="flash-card-inner">
+          <div className="flash-card-front">
+            <p className="question">{flashCard.question}</p>
+            <ol type="a">
               {flashCard.choices.map((choice) => (
                 <li key={crypto.randomUUID()}>{choice}</li>
               ))}
             </ol>
           </div>
-          <div className='flash-card-back'>
-            <p className='answer'>{flashCard.answer}</p>
+          <div className="flash-card-back">
+            <p className="answer">{flashCard.answer}</p>
             <p>{flashCard.explanation}</p>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
